@@ -276,15 +276,9 @@ where
     T: FromValue,
 {
     fn from_value(value: Value) -> Result<Option<T>, ConvertError> {
-        match value {
-            Value::OptionValue(ov) => match ov {
-                Some(val) => Ok(Some(FromValue::from_value(*val)?)),
-                None => Ok(None),
-            },
-            _ => Err(ConvertError::UnexpectedPropertyType {
-                expected: String::from("option"),
-                got: String::from(value.type_name()),
-            }),
+        match value.clone() {
+            Value::OptionValue(_) => Ok(None),
+            _ => Ok(Some(FromValue::from_value(value)?)),
         }
     }
 }
