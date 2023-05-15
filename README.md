@@ -1,3 +1,6 @@
+> **Note**
+> This is a fork of [google-cloud-rs](https://github.com/google-apis-rs/google-cloud-rs) that supports NULL values from Datastore
+
 google-cloud-rs
 ===============
 

@@ -354,6 +354,10 @@ fn convert_entity(project_name: &str, entity: Entity) -> api::Entity {
 
 fn convert_value(project_name: &str, value: Value) -> api::Value {
     let value_type = match value {
+        Value::OptionValue(val) => match val {
+            Some(v) => convert_value(project_name, *v).value_type.unwrap(),
+            None => ValueType::NullValue(0),
+        },
         Value::BooleanValue(val) => ValueType::BooleanValue(val),
         Value::IntegerValue(val) => ValueType::IntegerValue(val),
         Value::DoubleValue(val) => ValueType::DoubleValue(val),
